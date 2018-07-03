@@ -11,8 +11,8 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get hours_and_locations" do
-    get static_pages_hours_and_locations_url
+  test "should get hours_and_locations.html.erb" do
+    get static_pages_hours_and_locations.html.erb_url
     assert_response :success
   end
 
