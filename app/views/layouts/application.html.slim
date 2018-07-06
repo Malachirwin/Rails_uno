@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title
+      | Irwins Corn
+    / meta[name="viewport" content="width=device-width, initial-scale=1.0"]
+    meta[charset="utf-8"]
+  style
+    |  img.flip { transform: rotate(180deg); } body { background-color: #187a00;/*green;*/ border: 3px solid #c5c958; padding-bottom: 10000px; padding: 10px; } h1 { background-color: #c5c958; color: #187a00; }
+  body
+    h1
+
+    center[style="font-size:90px"]
+      i
+        | Irwins corn Website
+    br
+    center
+      a[href="/"]
+        | Home
+      a[href="./../static_pages/about"]
+        | About the Irwins
+      a[href="./../static_pages/hours_and_locations"]
+        | Hours and Locations
+    = yield
