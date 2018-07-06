@@ -5,8 +5,36 @@ html
       | Irwins Corn
     / meta[name="viewport" content="width=device-width, initial-scale=1.0"]
     meta[charset="utf-8"]
-  style
-    |  img.flip { transform: rotate(180deg); } body { background-color: #187a00;/*green;*/ border: 3px solid #c5c958; padding-bottom: 10000px; padding: 10px; } h1 { background-color: #c5c958; color: #187a00; }
+  css:
+    .tolebar {
+      font-size: 55px;
+      text-align: center;
+      margin: 0 20px 10px 20px;
+      display : inline-block;
+    }
+    h1 {
+      background: #c5c958;
+      color: #187a00;
+    }
+    body {
+      background: #187a00;
+      border: 3px solid #c5c958;
+      padding: 10px
+    }
+    p {
+      font-size: 40px;
+    }
+    h3 {
+      font-size: 50px;
+    }
+    .menu {
+      margin-top: -15px;
+      display: flex;
+      justify-content: space-around;
+      flex-direction: row;
+    }
+
+
   body
     h1
 
@@ -14,11 +42,11 @@ html
         i
           | Irwins corn Website
       br
-      center[style="font-size:70px"]
-        a[href="/"]
+      center[style="font-size:70px" class="menu"]
+        a[href="/" class="tolebar"]
           | Home
-        a[href="./../static_pages/about"]
-          | About the Irwins
-        a[href="./../static_pages/hours_and_locations"]
-          | Hours and Locations
+        a[href="./../static_pages/about" class="tolebar"]
+          | About Us
+        a[href="./../static_pages/hours_and_locations" class="tolebar"]
+          | Hours & Locations
     = yield
