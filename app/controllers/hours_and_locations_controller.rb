@@ -10,6 +10,7 @@ class HoursAndLocationsController < ApplicationController
   # GET /hours_and_locations/1
   # GET /hours_and_locations/1.json
   def show
+    @hours_and_locations = HoursAndLocation.all
   end
 
   # GET /hours_and_locations/new
