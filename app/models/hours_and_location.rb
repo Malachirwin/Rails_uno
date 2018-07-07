@@ -1,0 +1,2 @@
+class HoursAndLocation < ApplicationRecord
+end

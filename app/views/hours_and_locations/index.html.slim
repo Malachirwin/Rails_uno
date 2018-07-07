@@ -1,0 +1,21 @@
+h1 Listing hours_and_locations
+
+table
+  thead
+    tr
+      th Content
+      th
+      th
+      th
+
+  tbody
+    - @hours_and_locations.each do |hours_and_location|
+      tr
+        td = hours_and_location.content
+        td = link_to 'Show', hours_and_location
+        td = link_to 'Edit', edit_hours_and_location_path(hours_and_location)
+        td = link_to 'Destroy', hours_and_location, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Hours and location', new_hours_and_location_path
