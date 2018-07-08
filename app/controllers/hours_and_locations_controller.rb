@@ -80,8 +80,6 @@ class HoursAndLocationsController < ApplicationController
     end
 
     def authenticated?
-      authenticate_or_request_with_http_basic do |user_name, password|
-        session[:admin] = (user_name == "name" && password == "pass")
-      end
+      true
     end
 end
