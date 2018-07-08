@@ -1,4 +1,6 @@
 class HoursAndLocationsController < ApplicationController
+  include HttpAuthConcern
+  http_basic_authenticate_with name: 'cars-and-houses', password: 'ASg0al4s;42dw'
   before_action :set_hours_and_location, only: [:show, :edit, :update, :destroy]
   # GET /hours_and_locations
   # GET /hours_and_locations.json
