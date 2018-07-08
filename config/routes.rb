@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   get '/about', to: 'static_pages#about'
 
-  get '/hours_and_locations/6'#, to: 'hours_and_locations#show'
+  get '/hours_and_location/', to: 'static_pages#hours_and_locations'
 
   root 'static_pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

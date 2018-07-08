@@ -1,4 +1,5 @@
 h3
   | Hours and locations
-p
-  |  hours and locations goes here
+- @hours_and_locations.each do |element|
+  = element.content
+  br
