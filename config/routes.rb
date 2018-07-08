@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   get '/hours_and_location/', to: 'static_pages#hours_and_locations'
 
-  get '/login', to: 'login#login'
+  # get '/login', to: 'login#login'
 
   root 'static_pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
