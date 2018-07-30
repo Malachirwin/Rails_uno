@@ -10,6 +10,8 @@ gem 'turbolinks',   '5.0.1'
 gem 'jbuilder',     '2.7.0'
 gem 'slim'
 gem 'slim-rails'
+gem 'pry'
+gem 'figaro'
 
 group :development, :test do
   gem 'sqlite3', '1.3.13'

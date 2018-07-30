@@ -5,6 +5,7 @@ html
       | Irwins Corn
     / meta[name="viewport" content="width=device-width, initial-scale=1.0"]
     meta[charset="utf-8"]
+    = javascript_include_tag :application
   css:
     .tolebar {
       font-size: 55px;
@@ -23,6 +24,7 @@ html
     }
     p {
       font-size: 40px;
+      margin: 0;
     }
     h3 {
       font-size: 50px;
@@ -33,20 +35,27 @@ html
       justify-content: space-around;
       flex-direction: row;
     }
-
+    center a {
+      color: #187a00;
+    }
+    i:hover {
+      font-size: 95px;
+    }
+    a {
+    color: #c5c958;
+    }
+    a:hover {
+      color: black;
+    }
 
   body
     h1
 
       center[style="font-size:90px"]
-        i
-          | Irwins corn Website
+        i Irwins corn Website
       br
       center[style="font-size:70px" class="menu"]
-        a[href="/" class="tolebar"]
-          | Home
-        a[href="./about" class="tolebar"]
-          | About Us
-        a[href="./hours_and_location" class="tolebar"]
-          | Hours & Locations
+        a[href="/" class="tolebar"] Home
+        a[href="./about" class="tolebar"] About Us
+        a[href="./hours_and_location" class="tolebar"] Hours & Locations
     = yield

@@ -1,4 +1,4 @@
-h1 Listing hours_and_locations
+h1 showing: Hours and Locations
 
 table
   thead
@@ -22,7 +22,7 @@ table
         td = hours_and_location.updated_at.to_s.split(" UTC").join
         td = link_to 'Show', hours_and_location
         td = link_to 'Edit', edit_hours_and_location_path(hours_and_location)
-        td = link_to 'Destroy', hours_and_location, method: :delete, data: { confirm: 'Are you sure?' }
+        td = link_to 'Destroy', hours_and_location, method: :delete, data: { confirm: 'Are you sure? This will delete it permanently.' }
 
 br
 

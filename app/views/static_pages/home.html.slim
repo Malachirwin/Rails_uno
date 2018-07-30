@@ -3,8 +3,8 @@ h2[style="font-size:50px"]
   em[style="font-size:70px"]
     | Sweet Corn
 h2
-  |  Look for the yellow boat on camron street!
-center
-  = image_tag "corn2.JPG", style: 'height:700px;width:auto;', alt: "corn"
-center
-  = image_tag("corn.JPG", style: 'height:700px;width:auto;', alt: "corn2")
+  |  Look for the yellow boat!
+center class="img"
+  = link_to image_tag("corn2.JPG", style: 'height:700px;width:auto;', alt: "corn"), '/about'
+center class="img"
+  = link_to image_tag("corn.JPG", style: 'height:700px;width:auto;', alt: "corn2"), '/about'
