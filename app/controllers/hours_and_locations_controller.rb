@@ -35,7 +35,7 @@ class HoursAndLocationsController < ApplicationController
     @hours_and_location = HoursAndLocation.new(hours_and_location_params)
     respond_to do |format|
       if @hours_and_location.save
-        HoursAndLocationsMailer.new_hours_and_location(@hours_and_location).deliver_now
+        # HoursAndLocationsMailer.new_hours_and_location(@hours_and_location).deliver_now
         format.html { redirect_to @hours_and_location, notice: 'Hours and location was successfully created.' }
         format.json { render :show, status: :created, location: @hours_and_location }
       else
@@ -51,7 +51,7 @@ class HoursAndLocationsController < ApplicationController
     return redirect_to hours_and_locations_url unless authenticated?
     respond_to do |format|
       if @hours_and_location.update(hours_and_location_params)
-        HoursAndLocationsMailer.updated_hours_and_location(@hours_and_location).deliver_now
+        # HoursAndLocationsMailer.updated_hours_and_location(@hours_and_location).deliver_now
         format.html { redirect_to @hours_and_location, notice: 'Hours and location was successfully updated.' }
         format.json { render :show, status: :ok, location: @hours_and_location }
       else
