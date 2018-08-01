@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :days
   resources :profits
   resources :hours_and_locations
   # get '/hours_and_location', to: 'hours_and_locations#index'

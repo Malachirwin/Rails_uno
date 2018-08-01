@@ -1,4 +1,6 @@
 class ProfitsController < ApplicationController
+  include HttpAuthConcern
+  http_basic_authenticate_with name: 'cars-and-houses', password: 'ASg0al4s;42dw'
   before_action :set_profit, only: [:show, :edit, :update, :destroy]
 
   # GET /profits
