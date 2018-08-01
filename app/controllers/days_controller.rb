@@ -1,7 +1,7 @@
 class DaysController < ApplicationController
   skip_before_action :verify_authenticity_token
   include HttpAuthConcern
-  http_basic_authenticate_with name: 'cars-and-houses', password: 'ASg0al4s;42dw'
+  http_basic_authenticate_with name: 'cars-and-houses', password: 'Hello'
   before_action :set_day, only: [:show, :edit, :update, :destroy]
   #
   # # GET /days
