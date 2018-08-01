@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Amount:
+  = @profit.amount
+p
+  strong Dozens bought:
+  = @profit.dozens_bought
+p
+  strong Location:
+  = @profit.location
+
+=> link_to 'Edit', edit_profit_path(@profit)
+'|
+=< link_to 'Back', profits_path

@@ -1,0 +1,25 @@
+h1 Listing days
+
+table
+  thead
+    tr
+      th Total profit
+      th Total dozens sold
+      th Location
+      th
+      th
+      th
+
+  tbody
+    - @days.each do |day|
+      tr
+        td = day.total_profit
+        td = day.total_dozens_sold
+        td = day.location
+        td = link_to 'Show', day
+        td = link_to 'Edit', edit_day_path(day)
+        td = link_to 'Destroy', day, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Day', new_day_path

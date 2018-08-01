@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  total_profit: 1.5
+  total_dozens_sold: 1.5
+  location: MyString
+
+two:
+  total_profit: 1.5
+  total_dozens_sold: 1.5
+  location: MyString

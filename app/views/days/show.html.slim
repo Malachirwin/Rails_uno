@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Total profit:
+  = @day.total_profit
+p
+  strong Total dozens sold:
+  = @day.total_dozens_sold
+p
+  strong Location:
+  = @day.location
+
+=> link_to 'Edit', edit_day_path(@day)
+'|
+=< link_to 'Back', days_path

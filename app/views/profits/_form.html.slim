@@ -1,0 +1,19 @@
+= form_for @profit do |f|
+  - if @profit.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@profit.errors.count, "error")} prohibited this profit from being saved:"
+      ul
+        - @profit.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :dozens_bought
+    = f.number_field :dozens_bought, :class => 'text_field', :step => 0.01
+  .field
+    = f.label :amount
+    = f.number_field :amount, :class => 'text_field', :step => 0.01
+  .field
+    = f.label :location
+    = f.text_field :location
+    = hidden_field_tag 'profit[day_id]', ''
+  .actions = f.submit
