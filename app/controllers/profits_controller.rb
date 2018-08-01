@@ -1,4 +1,5 @@
 class ProfitsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   include HttpAuthConcern
   http_basic_authenticate_with name: 'cars-and-houses', password: 'ASg0al4s;42dw'
   before_action :set_profit, only: [:show, :edit, :update, :destroy]
@@ -7,6 +8,7 @@ class ProfitsController < ApplicationController
   # GET /profits.json
   def index
     @profits = Profit.all
+    @days = Day.all
   end
 
   # GET /profits/1
@@ -26,21 +28,36 @@ class ProfitsController < ApplicationController
   # POST /profits
   # POST /profits.json
   def create
-    if Day.all == []
-      day = Day.create(location: params[:profit][:location])
-    else
-      unless Day.order('created_at DESC').first.created_at.day == Date.current.day
+    ActiveRecord::Base.transaction do
+      if Day.all == []
         day = Day.create(location: params[:profit][:location])
       else
-        if Day.order('created_at DESC').first.location != params[:profit][:location]
+        unless Day.order('created_at DESC').first.created_at.day == Date.current.day
           day = Day.create(location: params[:profit][:location])
         else
-          day = Day.order('created_at DESC').first
+          if Day.order('created_at DESC').first.location != params[:profit][:location]
+            array = []
+            Day.all.each do |day_from_db|
+              if day_from_db.location == params[:profit][:location]
+                day = day_from_db
+                array.push true
+              else
+                array.push false
+              end
+            end
+            unless array.include?(true)
+              day = Day.create(location: params[:profit][:location])
+            end
+          else
+            day = Day.order('created_at DESC').first
+          end
         end
       end
+      @profit = Profit.new(new_profit_params(day))
+      unless @profit.valid?
+        raise ActiveRecord::Rollback
+      end
     end
-    @profit = Profit.new(profit_params(day))
-
     respond_to do |format|
       if @profit.save
         format.html { redirect_to @profit, notice: 'Profit was successfully created.' }
@@ -83,7 +100,11 @@ class ProfitsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def profit_params(day)
+    def profit_params
+      params.require(:profit).permit(:amount, :dozens_bought, :location)
+    end
+
+    def new_profit_params(day)
       params.require(:profit).tap do
         params[:profit][:day_id] = day.id
       end.permit(:amount, :dozens_bought, :location, :day_id)

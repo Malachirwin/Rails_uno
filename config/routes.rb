@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :profits
   resources :hours_and_locations
+  resources :days, only: [:destroy]
   # get '/hours_and_location', to: 'hours_and_locations#index'
   get '/home', to: 'static_pages#home'
 

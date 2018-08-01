@@ -1,5 +1,8 @@
 class DaysController < ApplicationController
-  # before_action :set_day, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token
+  include HttpAuthConcern
+  http_basic_authenticate_with name: 'cars-and-houses', password: 'ASg0al4s;42dw'
+  before_action :set_day, only: [:show, :edit, :update, :destroy]
   #
   # # GET /days
   # # GET /days.json
@@ -50,25 +53,22 @@ class DaysController < ApplicationController
   #     end
   #   end
   # end
-  #
-  # # DELETE /days/1
-  # # DELETE /days/1.json
-  # def destroy
-  #   @day.destroy
-  #   respond_to do |format|
-  #     format.html { redirect_to days_url, notice: 'Day was successfully destroyed.' }
-  #     format.json { head :no_content }
-  #   end
-  # end
-  #
-  # private
-  #   # Use callbacks to share common setup or constraints between actions.
-  #   def set_day
-  #     @day = Day.find(params[:id])
-  #   end
-  #
-  #   # Never trust parameters from the scary internet, only allow the white list through.
-  #   def day_params
-  #     params.require(:day).permit(:total_profit, :total_dozens_sold, :location)
-  #   end
+
+  # DELETE /days/1
+  # DELETE /days/1.json
+  def destroy
+    @day.destroy
+    redirect_to profits_path, notice: 'Day was successfully destroyed.'
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_day
+      @day = Day.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def day_params
+      params.require(:day).permit(:total_profit, :total_dozens_sold, :location)
+    end
 end

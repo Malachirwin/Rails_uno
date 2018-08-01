@@ -1,5 +1,5 @@
 - months = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
-h1 Listing profits
+h1 Profits
 - total_profits = 0
 - total_dozens_sold = 0
 table
@@ -23,12 +23,16 @@ table
         td = link_to 'Destroy', profit, data: { confirm: 'Are you sure?' }, method: :delete
       - total_profits += profit.amount
       - total_dozens_sold += profit.dozens_bought
-h1 total profit:
+= link_to 'New Profit', new_profit_path
+br
+= link_to 'Hours and Location', hours_and_locations_path
+h1 Total Profit:
 = total_profits
-h1 total dozens sold:
+h1 Total Dozens Sold:
 = total_dozens_sold
 br
-- Day.all.each do |day|
+br
+- @days.each do |day|
   - day_profit = 0
   - day_dozens_sold = 0
   - day.profits.each do |profit|
@@ -38,9 +42,9 @@ br
   - day.total_profit = day_profit unless day.total_profit == day_profit
   - day.save
   = "On #{months[day.created_at.month]} #{day.created_at.day}, #{day.created_at.year} "
-  = "At #{day.location} You made #{day.total_profit}"
+  = "At #{day.location} You made $#{day.total_profit}"
   br
   = "And sold #{day.total_dozens_sold} dozens there"
+  = link_to 'Destroy', day, data: { confirm: 'Are you sure?' }, method: :delete
   br
   br
-= link_to 'New Profit', new_profit_path
