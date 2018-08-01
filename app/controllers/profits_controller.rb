@@ -1,7 +1,7 @@
 class ProfitsController < ApplicationController
   skip_before_action :verify_authenticity_token
   include HttpAuthConcern
-  http_basic_authenticate_with name: 'cars-and-houses', password: 'Hello'
+  http_basic_authenticate_with name: 'cars-and-houses', password: 'elephant-refrigerator-dmjnmje'
   before_action :set_profit, only: [:show, :edit, :update, :destroy]
 
   # GET /profits

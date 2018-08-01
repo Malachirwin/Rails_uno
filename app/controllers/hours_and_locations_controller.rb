@@ -1,7 +1,7 @@
 class HoursAndLocationsController < ApplicationController
   skip_before_action :verify_authenticity_token
   include HttpAuthConcern
-  http_basic_authenticate_with name: 'cars-and-houses', password: 'Hello'
+  http_basic_authenticate_with name: 'cars-and-houses', password: 'elephant-refrigerator-dmjnmje'
   before_action :set_hours_and_location, only: [:show, :edit, :update, :destroy]
   # GET /hours_and_locations
   # GET /hours_and_locations.json
