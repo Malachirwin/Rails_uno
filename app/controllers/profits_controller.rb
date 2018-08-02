@@ -29,34 +29,22 @@ class ProfitsController < ApplicationController
   # POST /profits.json
   def create
     ActiveRecord::Base.transaction do
-      if Day.all == []
-        day = Day.create(location: params[:profit][:location])
+      unless date_match?
+        day = Day.create(location: params[:profit][:location], date: make_date)
       else
-        unless Day.order('created_at DESC').first.created_at.day == Date.current.day
-          day = Day.create(location: params[:profit][:location])
-        else
-          if Day.order('created_at DESC').first.location != params[:profit][:location]
-            array = []
-            Day.all.each do |day_from_db|
-              if day_from_db.location == params[:profit][:location]
-                day = day_from_db
-                array.push true
-              else
-                array.push false
-              end
-            end
-            unless array.include?(true)
-              day = Day.create(location: params[:profit][:location])
-            end
-          else
-            day = Day.order('created_at DESC').first
+        if Day.order('created_at DESC').first.location != params[:profit][:location]
+          Day.all.each do |day_from_db|
+            next if day_from_db.location != params[:profit][:location]
+            day = day_from_db
+            day_is_from_db = true
           end
+          day = Day.create(location: params[:profit][:location], date: make_date) unless day_is_from_db
+        else
+          day = Day.order('created_at DESC').first
         end
       end
       @profit = Profit.new(new_profit_params(day))
-      unless @profit.valid?
-        raise ActiveRecord::Rollback
-      end
+      raise ActiveRecord::Rollback unless @profit.valid?
     end
     respond_to do |format|
       if @profit.save
@@ -101,12 +89,20 @@ class ProfitsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profit_params
-      params.require(:profit).permit(:amount, :dozens_bought, :location)
+      params.require(:profit).permit(:amount, :dozens_bought, :location, :date)
     end
 
     def new_profit_params(day)
       params.require(:profit).tap do
         params[:profit][:day_id] = day.id
-      end.permit(:amount, :dozens_bought, :location, :day_id)
+      end.permit(:amount, :dozens_bought, :location, :day_id, :date)
+    end
+
+    def make_date
+      Date.new(params[:profit]['date(1i)'].to_i, params[:profit]['date(2i)'].to_i, params[:profit]['date(3i)'].to_i)
+    end
+
+    def date_match?
+      Day.all.any? && Day.order('created_at DESC').first.created_at.strftime('%-d') == params[:profit]['date(3i)'] && Day.order('created_at DESC').first.created_at.strftime('%Y') == params[:profit]['date(1i)'] && Day.order('created_at DESC').first.created_at.strftime('%_m') == params[:profit]['date(2i)']
     end
 end

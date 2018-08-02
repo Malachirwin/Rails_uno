@@ -11,9 +11,15 @@
     = f.number_field :dozens_bought, :class => 'text_field', :step => 0.01
   .field
     = f.label :amount
-    = f.number_field :amount, :class => 'text_field', :step => 0.01
+    - array = []
+    - 25.times do |index|
+      - array.push "#{(index + 1)* 4}"
+    = f.select :amount, array
+  .field
+    = f.label :date
+    = f.date_select :date
   .field
     = f.label :location
-    = f.text_field :location
+    = f.select :location, ["Cameron street", "London road", "RFBC", "Other"]
     = hidden_field_tag 'profit[day_id]', ''
   .actions = f.submit
